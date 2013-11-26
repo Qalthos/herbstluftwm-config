@@ -1,0 +1,69 @@
+# Florian Bruhin <me@the-compiler.org>
+
+use_xft yes
+xftfont DejaVu Sans Mono:size=8
+override_utf8_locale yes
+
+update_interval 1
+total_run_times 0
+
+own_window yes
+own_window_type panel
+own_window_hints undecorated,sticky,skip_taskbar,skip_pager
+
+border_inner_margin 0
+border_outer_margin 0
+draw_borders no
+draw_graph_borders no
+
+background no
+
+# Eliminate flickering
+double_buffer yes 
+maximum_width 1500
+
+# Use KiB/MiB/... instead of just bytes
+format_human_readable yes
+# Print used memory with buffers
+no_buffers yes
+# Display k, G, ... instead of kiB, GiB, ...
+short_units yes
+
+default_color d0d0d0
+own_window_colour 1c1c1c
+
+use_spacer left
+if_up_strictness address
+pad_percents 2
+
+alignment top_left
+gap_x 90
+gap_y 0
+
+default_graph_size 8 30
+color0 d0d0d0
+color1 afdf87
+color2 00ff00
+color3 ffff00
+color4 ff0000
+
+TEXT
+${goto 10}\
+${color1}mem${color0} ${mem}  \
+${color1}batt${color0} \
+${if_match ${exec cat /sys/class/power_supply/AC/online} == 1}\
+${if_match ${battery_percent BAT0} == 100}${color2}${else}${color3}${endif}\
+${else}\
+${if_match ${battery_percent BAT0} >= 50}${color3}${else}\
+${if_match ${battery_percent BAT0} >= 12}${color4}${else}\
+${color4}${endif}${endif}${endif}\
+↯${battery_percent BAT0}%${color0} \
+${if_match ${exec cat /sys/class/power_supply/AC/online} == 1}\
+${if_match ${battery_percent BAT1} == 100}${color2}${else}${color3}${endif}\
+${else}\
+${if_match ${battery_percent BAT1} >= 50}${color3}${else}\
+${if_match ${battery_percent BAT1} >= 12}${color4}${else}\
+${color4}${endif}${endif}${endif}\
+↯${battery_percent BAT1}%${color0}  \
+${color1}date${color0} ${time %a %Y-%m-%d} ${time %R}\
+  
