@@ -5,19 +5,19 @@
 [[ $0 == /* ]] && script="$0" || script="${PWD}/${0#./}"
 panelfolder=${script%/*}
 trap 'herbstclient emit_hook quit_panel' TERM
-herbstclient pad 0 24
+herbstclient pad 0 14
 herbstclient emit_hook quit_panel
-
-dzen2 -p -h 1 -w 1600 -x 0 -y 23 -bg '#afdf87' &
-pids+=($!)
 
 conky -c "$panelfolder/conkyrc" &
 pids+=($!)
 
+#dzen2 -p -h 1 -w 1600 -x 0 -y 14 -bg '#afdf87' &
+#pids+=($!)
+
 "$panelfolder/tags.sh" &
 pids+=($!)
 
-trayer --edge top --align right --widthtype request --heighttype pixel --height 12\
+trayer --edge top --align right --widthtype request --heighttype pixel --height 14\
        --expand true --tint 0x222222 --transparent true --alpha 0 &
 pids+=($!)
 
