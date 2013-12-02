@@ -48,13 +48,11 @@ color3 ffff00
 color4 ff0000
 
 TEXT
-${goto 10}\
-${color1}mem${color0} ${mem}  \
-${color1}batt${color0} \
+| ${color1}mem${color0} ${mem} | \
 # Test for chaging status
-${font Symbola:size=6}\
-${if_match ${exec cat /sys/class/power_supply/AC/online} == 1}🔌 ${else}🔋\
-${endif}${font} \
+${color1}\
+${if_match ${exec cat /sys/class/power_supply/AC/online} == 1}\
+⚡AC⚡${else}batt${endif}${color0} \
 ${if_match ${battery_percent BAT0} == 100}${color2}${else}\
 ${if_match ${battery_percent BAT0} >= 50}${color3}${else}${color4}\
 ${endif}${endif}\
@@ -62,7 +60,6 @@ ${battery_percent BAT0}%${color0} \
 ${if_match ${battery_percent BAT1} == 100}${color2}${else}\
 ${if_match ${battery_percent BAT1} >= 50}${color3}${else}${color4}\
 ${endif}${endif}\
-${battery_percent BAT1}%${color0} \
+${battery_percent BAT1}%${color0} | \
 # Date and time
 ${color1}date${color0} ${time %a %Y-%m-%d} ${time %R} \
- 
