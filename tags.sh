@@ -35,5 +35,5 @@ herbstclient --idle 2>/dev/null | {
             quit_panel*) exit ;;
         esac
     done
-} | dzen2 -h 14 -fn '-*-profont-*-*-*-*-11-*-*-*-*-*-*-*' -ta l -sa l \
-          -w 90 -fg "$dzen_fg" -bg "$dzen_bg" -e 'button3='
+} | dzen2 -h 14 -fn '-*-profont-*-*-*-*-10-*-*-*-*-*-*-*' -ta l -sa l \
+          -fg "$dzen_fg" -bg "$dzen_bg"

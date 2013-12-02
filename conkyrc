@@ -24,7 +24,7 @@ maximum_width 1500
 
 # Use KiB/MiB/... instead of just bytes
 format_human_readable yes
-# Print used memory with buffers
+# Print used memory without buffers
 no_buffers yes
 # Display k, G, ... instead of kiB, GiB, ...
 short_units yes
@@ -37,7 +37,7 @@ if_up_strictness address
 pad_percents 2
 
 alignment top_left
-gap_x 90
+gap_x 180
 gap_y 0
 
 default_graph_size 8 30
