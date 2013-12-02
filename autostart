@@ -24,8 +24,10 @@ hc keybind $Mod-Shift-c close
 hc keybind $Mod-F2 spawn dmenu_run
 hc keybind $Mod-F3 spawn lilyterm
 hc keybind $Mod-F5 spawn bpython2-gtk
-hc keybind XF86Screensaver spawn xscreensaver-command -lock
-hc keybind XF86Launch spawn nemo
+hc keybind XF86ScreenSaver spawn xscreensaver-command -lock
+hc keybind XF86Launch1 spawn nemo
+hc keybind XF86MonBrightnessDown spawn xbacklight -dec 5
+hc keybind XF86MonBrightnessUp spawn xbacklight -inc 5
 
 # tags
 TAG_NAMES=( {1..6} )
