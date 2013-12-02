@@ -30,7 +30,7 @@ hc keybind XF86MonBrightnessDown spawn xbacklight -dec 5
 hc keybind XF86MonBrightnessUp spawn xbacklight -inc 5
 
 # tags
-TAG_NAMES=( {1..6} )
+TAG_NAMES=( 'main' 'work' 'games' 'irc' 'mail' 'chat' )
 hc rename default "${TAG_NAMES[0]}" || true
 for i in ${!TAG_NAMES[@]} ; do
     hc add "${TAG_NAMES[$i]}"
