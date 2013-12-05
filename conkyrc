@@ -65,5 +65,9 @@ ${battery_percent BAT1}%${color0} | \
 ${color1}vol${color0} ${if_match ${ibm_volume} < 0}\
 ${exec amixer get Master | egrep -o '[0-9]+%' | head -n 1}\
 ${else}${ibm_volume}${endif} | \
+# Weather!
+${color1}temp${color0} \
+${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ KROC weather}\
+${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ KROC temperature}C | \
 # Date and time
 ${color1}date${color0} ${time %a %Y-%m-%d} ${time %R} \
