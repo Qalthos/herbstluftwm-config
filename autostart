@@ -138,4 +138,3 @@ pgrep xscreensaver || xscreensaver -nosplash &
 pgrep dropboxd || dropboxd &
 pgrep nm-applet || nm-applet &
 pgrep redshift || redshift &
-pgrep mate-volume-control-panel || mate-volume-control-applet &

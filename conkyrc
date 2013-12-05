@@ -61,5 +61,9 @@ ${if_match ${battery_percent BAT1} == 100}${color2}${else}\
 ${if_match ${battery_percent BAT1} >= 50}${color3}${else}${color4}\
 ${endif}${endif}\
 ${battery_percent BAT1}%${color0} | \
+# Audio volume
+${color1}vol${color0} ${if_match ${ibm_volume} < 0}\
+${exec amixer get Master | egrep -o '[0-9]+%' | head -n 1}\
+${else}${ibm_volume}${endif} | \
 # Date and time
 ${color1}date${color0} ${time %a %Y-%m-%d} ${time %R} \
