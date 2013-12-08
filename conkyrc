@@ -62,7 +62,7 @@ ${if_match ${battery_percent BAT1} >= 50}${color3}${else}${color4}\
 ${endif}${endif}\
 ${battery_percent BAT1}%${color0} | \
 # Audio volume
-${color1}vol${color0} ${if_match ${ibm_volume} < 0}\
+${color1}vol${color0} ${if_match "$ibm_volume" == "-1"}\
 ${exec amixer get Master | egrep -o '[0-9]+%' | head -n 1}\
 ${else}${ibm_volume}${endif} | \
 # Weather!
