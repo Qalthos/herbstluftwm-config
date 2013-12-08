@@ -17,8 +17,8 @@ pids+=($!)
 "$panelfolder/tags.sh" &
 pids+=($!)
 
-trayer --edge top --align right --widthtype request --heighttype pixel --height 14\
-       --expand true --tint 0x222222 --transparent true --alpha 0 &
+stalonetray --grow-gravity E --icon-gravity NE --kludges=force_icons_size\
+            --icon-size 16 --geometry 1x1+1584+0 --background '#222222' &
 pids+=($!)
 
 herbstclient --wait '^(quit_panel|reload).*'
