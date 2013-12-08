@@ -36,4 +36,4 @@ herbstclient --idle 2>/dev/null | {
         esac
     done
 } | dzen2 -h 14 -fn '-*-profont-*-*-*-*-10-*-*-*-*-*-*-*' -ta l -sa l \
-          -fg "$dzen_fg" -bg "$dzen_bg"
+          -w 180 -fg "$dzen_fg" -bg "$dzen_bg"
