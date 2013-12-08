@@ -136,6 +136,6 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
 done
 # Autostart some programs
 pgrep xscreensaver || xscreensaver -nosplash &
-pgrep dropboxd || dropboxd &
+pgrep dropbox || dropboxd || dropbox start &
 pgrep nm-applet || nm-applet &
 pgrep redshift || redshift &
