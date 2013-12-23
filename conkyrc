@@ -49,20 +49,14 @@ color2 00ff00
 color3 ffff00
 color4 ff0000
 
+# Battery percent
+template9 ${if_match ${battery_percent BAT\1} >= 75}${color2}${else}${if_match ${battery_percent BAT\1} >= 25}${color3}${else}${color4}${endif}${endif}${battery_percent BAT\1}%${color0}
+
 TEXT
 | ${color1}mem${color0} ${mem} | \
 # Test for chaging status
-${color1}\
-${if_match ${exec cat /sys/class/power_supply/AC/online} == 1}\
-⚡AC⚡${else}batt${endif}${color0} \
-${if_match ${battery_percent BAT0} == 100}${color2}${else}\
-${if_match ${battery_percent BAT0} >= 50}${color3}${else}${color4}\
-${endif}${endif}\
-${battery_percent BAT0}%${color0} \
-${if_match ${battery_percent BAT1} == 100}${color2}${else}\
-${if_match ${battery_percent BAT1} >= 50}${color3}${else}${color4}\
-${endif}${endif}\
-${battery_percent BAT1}%${color0} | \
+${color1}${if_match ${exec cat /sys/class/power_supply/AC/online} == 1}⚡AC⚡${else}batt${endif}${color0} \
+${template9 0} ${template9 1} | \
 # Audio volume
 ${color1}vol${color0} ${if_match "$ibm_volume" == "-1"}\
 ${exec amixer get Master | egrep -o '[0-9]+%' | head -n 1}\
