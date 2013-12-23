@@ -1,35 +1,15 @@
 # Florian Bruhin <me@the-compiler.org>
 
-use_xft yes
-xftfont DejaVu Sans Mono:size=8
-override_utf8_locale yes
-
 update_interval 1
 update_interval_on_battery 5
 total_run_times 0
 
 # Windowy options
-own_window yes
-own_window_type panel
-own_window_hints undecorated,sticky,skip_taskbar,skip_pager
-
-default_color d0d0d0
-own_window_colour 1c1c1c
-
-border_inner_margin 0
-border_outer_margin 0
-draw_borders no
-draw_graph_borders no
-
-# Eliminate flickering
-double_buffer yes 
-maximum_width 1500
-
-alignment top_left
-gap_x 180
-gap_y 0
+out_to_console yes
+out_to_x no
 
 background no
+
 
 # Use KiB/MiB/... instead of just bytes
 format_human_readable yes
@@ -42,28 +22,20 @@ use_spacer none
 if_up_strictness address
 pad_percents 0
 
-default_graph_size 8 30
-color0 d0d0d0
-color1 afdf87
-color2 00ff00
-color3 ffff00
-color4 ff0000
-
-# Battery percent
-template9 ${if_match ${battery_percent BAT\1} >= 75}${color2}${else}${if_match ${battery_percent BAT\1} >= 25}${color3}${else}${color4}${endif}${endif}${battery_percent BAT\1}%${color0}
+# Battery template
+template9 ${if_match ${battery_percent BAT\1} >= 75}${else}${if_match ${battery_percent BAT\1} >= 25}${else}${endif}${endif}${battery_percent BAT\1}%
 
 TEXT
-| ${color1}mem${color0} ${mem} | \
+cpu ${hwmon 2 temp 2}|${hwmon 2 temp 3} | \
+mem ${mem} | \
 # Test for chaging status
-${color1}${if_match ${exec cat /sys/class/power_supply/AC/online} == 1}⚡AC⚡${else}batt${endif}${color0} \
-${template9 0} ${template9 1} | \
+${if_match ${exec cat /sys/class/power_supply/AC/online} == 1}⚡AC⚡${else}batt${endif} ${template9 0} ${template9 1} | \
 # Audio volume
-${color1}vol${color0} ${if_match "$ibm_volume" == "-1"}\
+vol ${if_match "$ibm_volume" == "-1"}\
 ${exec amixer get Master | egrep -o '[0-9]+%' | head -n 1}\
 ${else}${ibm_volume}${endif} | \
 # Weather!
-${color1}temp${color0} \
-${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ KROC weather}\
+${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ KROC weather} \
 ${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ KROC temperature}C | \
 # Date and time
-${color1}date${color0} ${time %a %Y-%m-%d} ${time %R} \
+${time %a %Y-%m-%d} ${time %R} \

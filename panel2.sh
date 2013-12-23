@@ -5,7 +5,7 @@
 [[ $0 == /* ]] && script="$0" || script="${PWD}/${0#./}"
 panelfolder=${script%/*}
 trap 'herbstclient emit_hook quit_panel' TERM
-herbstclient pad 0 14
+herbstclient pad 0 16
 herbstclient emit_hook quit_panel
 
 dzen_fg="#d0d0d0"
@@ -52,6 +52,11 @@ herbstclient --idle 2>/dev/null | {
           -w 1100 -fg "$dzen_fg" -bg "$dzen_bg" &
 pids+=($!)
 
+herbstclient --idle 2>/dev/null | {
+    conky -c "$panelfolder/conkyrc"
+} | dzen2 -h 16 -fn 'DejaVu Sans Mono:size=6' -ta l -sa l \
+          -w 400 -x 1100 -fg "$dzen_fg" -bg "$dzen_bg" &
+pids+=($!)
 
 stalonetray --grow-gravity E --icon-gravity NE --kludges=force_icons_size\
             --icon-size 16 --geometry 1x1+1584+0 --background '#222222' &
