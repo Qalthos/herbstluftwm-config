@@ -5,22 +5,31 @@ xftfont DejaVu Sans Mono:size=8
 override_utf8_locale yes
 
 update_interval 1
+update_interval_on_battery 5
 total_run_times 0
 
+# Windowy options
 own_window yes
 own_window_type panel
 own_window_hints undecorated,sticky,skip_taskbar,skip_pager
+
+default_color d0d0d0
+own_window_colour 1c1c1c
 
 border_inner_margin 0
 border_outer_margin 0
 draw_borders no
 draw_graph_borders no
 
-background no
-
 # Eliminate flickering
 double_buffer yes 
 maximum_width 1500
+
+alignment top_left
+gap_x 180
+gap_y 0
+
+background no
 
 # Use KiB/MiB/... instead of just bytes
 format_human_readable yes
@@ -29,16 +38,9 @@ no_buffers yes
 # Display k, G, ... instead of kiB, GiB, ...
 short_units yes
 
-default_color d0d0d0
-own_window_colour 1c1c1c
-
-use_spacer left
+use_spacer none
 if_up_strictness address
-pad_percents 2
-
-alignment top_left
-gap_x 180
-gap_y 0
+pad_percents 0
 
 default_graph_size 8 30
 color0 d0d0d0
