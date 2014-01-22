@@ -54,6 +54,12 @@ pids+=($!)
 
 herbstclient --idle 2>/dev/null | {
     conky -c "$panelfolder/conkyrc"
+    while true; do
+        read line || exit
+        case "$line" in
+            quit_panel*|reload*) exit ;;
+        esac
+    done
 } | dzen2 -h 16 -fn 'DejaVu Sans Mono:size=6' -ta l -sa l \
           -w 400 -x 1100 -fg "$dzen_fg" -bg "$dzen_bg" &
 pids+=($!)
