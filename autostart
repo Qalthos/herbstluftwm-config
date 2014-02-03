@@ -124,7 +124,7 @@ hc load chat '(split horizontal:0.150000:0
     (clients grid:0)
     (split horizontal:0.250000:0 (clients vertical:0) (clients grid:0)))'
 hc rule class=Pidgin tag=chat index=10
-hc rule class=gPodder tag=chat index=11
+hc rule class~'(Gpodder|Audacious)' tag=chat index=11
 
 # unlock, just to be sure
 hc unlock
