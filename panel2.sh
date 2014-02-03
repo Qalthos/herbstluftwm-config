@@ -3,6 +3,10 @@
 # Florian Bruhin <me@the-compiler.org>
 
 monitor=$1
+geometry=( $(herbstclient monitor_rect $monitor) )
+x=${geometry[0]}
+y=${geometry[1]}
+width=${geometry[2]}
 
 [[ $0 == /* ]] && script="$0" || script="${PWD}/${0#./}"
 panelfolder=${script%/*}
@@ -52,7 +56,8 @@ herbstclient --idle 2>/dev/null | {
         esac
     done
 } | dzen2 -h 16 -fn 'DejaVu Sans Mono:size=6' -ta l -sa l \
-          -w 1100 -fg "$dzen_fg" -bg "$dzen_bg" &
+          -x $x -y $y -w $(($width-500)) \
+          -fg "$dzen_fg" -bg "$dzen_bg" &
 pids+=($!)
 
 herbstclient --idle 2>/dev/null | {
@@ -64,11 +69,12 @@ herbstclient --idle 2>/dev/null | {
         esac
     done
 } | dzen2 -h 16 -fn 'DejaVu Sans Mono:size=6' -ta l -sa l \
-          -w 400 -x 1100 -fg "$dzen_fg" -bg "$dzen_bg" &
+          -x $(($x+$width-500)) -y $y -w 400 \
+          -fg "$dzen_fg" -bg "$dzen_bg" &
 pids+=($!)
 
 stalonetray --grow-gravity E --icon-gravity NE --kludges=force_icons_size\
-            --icon-size 16 --geometry 1x1+1584+0 --background '#222222' &
+            --icon-size 16 --geometry 1x1+$(($x+$width-16))+$y --background '#222222' &
 pids+=($!)
 
 herbstclient --wait '^(quit_panel|reload).*'
