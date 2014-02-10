@@ -60,17 +60,18 @@ herbstclient --idle 2>/dev/null | {
           -fg "$dzen_fg" -bg "$dzen_bg" &
 pids+=($!)
 
-herbstclient --idle 2>/dev/null | {
-    conky -c "$panelfolder/conkyrc"
-    while true; do
-        read line || exit
-        case "$line" in
-            quit_panel*|reload*) exit ;;
-        esac
-    done
-} | dzen2 -h 16 -fn 'DejaVu Sans Mono:size=6' -ta l -sa l \
-          -x $(($x+$width-500)) -y $y -w 400 \
-          -fg "$dzen_fg" -bg "$dzen_bg" &
+CONKY_PIPE=/tmp/conky-pipe
+if [ ! -p $CONKY_PIPE ]; then
+    if [ -e $CONKY_PIPE ]; then
+        rm -r $CONKY_PIPE
+    fi
+    mkfifo -m 600 $CONKY_PIPE
+    conky -c "$panelfolder/conkyrc" > $CONKY_PIPE &
+    pids+=($!)
+fi
+dzen2 -h 16 -fn 'DejaVu Sans Mono:size=6' -ta l -sa l \
+      -x $(($x+$width-500)) -y $y -w 450 \
+      -fg "$dzen_fg" -bg "$dzen_bg" < $CONKY_PIPE &
 pids+=($!)
 
 stalonetray --grow-gravity E --icon-gravity NE --kludges=force_icons_size\
@@ -79,4 +80,5 @@ pids+=($!)
 
 herbstclient --wait '^(quit_panel|reload).*'
 kill -TERM "${pids[@]}" >/dev/null 2>&1
+rm -f $CONKY_PIPE
 exit 0
