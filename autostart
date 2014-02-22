@@ -26,12 +26,13 @@ hc keybind $Mod-F2 spawn dmenu_run
 hc keybind $Mod-F3 spawn lilyterm
 hc keybind $Mod-F5 spawn bpython2-gtk
 hc keybind XF86ScreenSaver spawn xscreensaver-command -lock
-hc keybind XF86Launch1 spawn nemo
+hc keybind XF86Display spawn arandr
 hc keybind XF86MonBrightnessDown spawn xbacklight -dec 5
 hc keybind XF86MonBrightnessUp spawn xbacklight -inc 5
 hc keybind XF86AudioRaiseVolume spawn amixer -q set Master 5%+ unmute
 hc keybind XF86AudioLowerVolume spawn amixer -q set Master 5%- unmute
 hc keybind XF86AudioMute spawn amixer -q set Master toggle
+hc keybind XF86Launch1 spawn nemo
 
 # tags
 TAG_NAMES=( 'main' 'work' 'games' 'irc' 'mail' 'chat' )
