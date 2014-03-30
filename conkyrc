@@ -26,18 +26,17 @@ pad_percents 0
 template9 ${if_match ${battery_percent BAT\1} >= 75}${else}${if_match ${battery_percent BAT\1} >= 25}${else}${endif}${endif}${battery_percent BAT\1}%
 
 TEXT
-cpu ${hwmon 2 temp 2}|${hwmon 2 temp 3} |\
-^i(/home/nate/.local/share/icons/mem.xbm)${mem} |\
+^i(/home/nate/.local/share/icons/mem.xbm)${mem} \
 # Test for chaging status
 ${if_match ${exec cat /sys/class/power_supply/AC/online} == 1}\
 ^i(/home/nate/.local/share/icons/ac-charging.xbm)${else}\
 ^i(/home/nate/.local/share/icons/battery-low.xbm)${endif}\
-${template9 0} ${template9 1} | \
+${template9 0} ${template9 1} \
 # Audio volume
-vol ${if_match "$ibm_volume" == "-1"}\
+^i(/home/nate/.local/share/icons/volume.xbm)${if_match "$ibm_volume" == "-1"}\
 ${exec amixer get Master | egrep -o '[0-9]+%' | head -n 1}\
-${else}${ibm_volume}${endif} | \
+${else}${ibm_volume}${endif} \
 # Weather!
 ${exec cat /tmp/weather} | \
 # Date and time
-${time %a %Y-%m-%d} ${time %R} \
+${time %a %Y-%m-%d} ${time %R}\
