@@ -13,7 +13,8 @@ fbsetbg -a -r ~/documents/Dropbox/Pictures/walls
 
 # remove all existing keybindings
 hc keyunbind --all
-hc set_layout 3
+hc set default_frame_layout 3
+hc set_layout grid
 
 # keybindings
 Mod=Mod1
