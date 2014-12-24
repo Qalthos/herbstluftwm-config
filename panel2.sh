@@ -15,16 +15,28 @@ herbstclient pad $monitor 16
 herbstclient emit_hook quit_panel
 
 
-dzen_fg="#d0d0d0"
+dzen_fg="#ffffff"
 dzen_bg="#1c1c1c"
 normal_fg=""
 normal_bg=
 viewed_fg="#000000"
 viewed_bg="#afdf87"
+other_fg="#87dffa"
+other_bg=
 urgent_fg=
 urgent_bg="#df8787"
 used_fg="#afdf87"
 used_bg=
+
+CONKY_PIPE=/tmp/conky-pipe
+if [ ! -p $CONKY_PIPE ]; then
+    if [ -e $CONKY_PIPE ]; then
+        rm -r $CONKY_PIPE
+    fi
+    mkfifo -m 600 $CONKY_PIPE
+    conky -c "$panelfolder/conkyrc" > $CONKY_PIPE &
+    pids+=($!)
+fi
 
 herbstclient --idle 2>/dev/null | {
     tags=( $(herbstclient tag_status) )
@@ -32,6 +44,7 @@ herbstclient --idle 2>/dev/null | {
     while true; do
         for tag in "${tags[@]}" ; do
             case ${tag:0:1} in
+                '-') cstart="^fg($other_fg)^bg($other_bg)" ;;
                 '#') cstart="^fg($viewed_fg)^bg($viewed_bg)" ;;
                 '+') cstart="^fg($viewed_fg)^bg($viewed_bg)" ;;
                 ':') cstart="^fg($used_fg)^bg($used_bg)"     ;;
@@ -55,22 +68,13 @@ herbstclient --idle 2>/dev/null | {
                 ;;
         esac
     done
-} | dzen2 -h 16 -fn 'DejaVu Sans Mono:size=6' -ta l -sa l \
+} | dzen2 -h 16 -fn 'DejaVu Sans Mono:size=8' -ta l -sa l \
           -x $x -y $y -w $(($width-500)) \
           -fg "$dzen_fg" -bg "$dzen_bg" &
 pids+=($!)
 
-CONKY_PIPE=/tmp/conky-pipe
-if [ ! -p $CONKY_PIPE ]; then
-    if [ -e $CONKY_PIPE ]; then
-        rm -r $CONKY_PIPE
-    fi
-    mkfifo -m 600 $CONKY_PIPE
-    conky -c "$panelfolder/conkyrc" > $CONKY_PIPE &
-    pids+=($!)
-fi
-dzen2 -h 16 -fn 'DejaVu Sans Mono:size=6' -ta l -sa l \
-      -x $(($x+$width-500)) -y $y -w 450 \
+dzen2 -h 16 -fn 'DejaVu Sans Mono:size=8' -ta l -sa l \
+      -x $(($x+$width-500)) -y $y -w 425 \
       -fg "$dzen_fg" -bg "$dzen_bg" < $CONKY_PIPE &
 pids+=($!)
 
