@@ -21,10 +21,12 @@ Mod=Mod1
 hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
+hc keybind $Mod-Control-Shift-i spawn xcalib -invert -alter
 
 # run lots of things
 hc keybind $Mod-F2 spawn dmenu_run
 hc keybind $Mod-F3 spawn lilyterm
+hc keybind $Mod-F4 spawn xkill
 hc keybind $Mod-F5 spawn bpython2-gtk
 hc keybind XF86ScreenSaver spawn xscreensaver-command -lock
 hc keybind XF86Display spawn arandr
@@ -76,6 +78,7 @@ hc mousebind $Mod-Button3 zoom
 
 # focus
 hc keybind $Mod-BackSpace   cycle_monitor
+hc keybind $Mod-Shift-BackSpace   use $(herbstclient list_monitors | grep -v FOCUS | cut --delimiter='"' -f 2)
 hc keybind $Mod-Tab         cycle_all +1
 hc keybind $Mod-Shift-Tab   cycle_all -1
 hc keybind $Mod-c cycle
