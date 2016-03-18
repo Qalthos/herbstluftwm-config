@@ -55,6 +55,8 @@ hc keybind $Mod-Shift-Control-Right move_index +1 --skip-visible
 hc keybind $Mod-Shift-Control-Left  move_index -1 --skip-visible
 hc keybind $Mod-Shift-Control-Up    move_index -3 --skip-visible
 hc keybind $Mod-Shift-Control-Down  move_index +3 --skip-visible
+hc keybind $Mod-bracketright move_index +1
+hc keybind $Mod-bracketleft  move_index -1
 
 # layouting
 hc keybind $Mod-r remove
