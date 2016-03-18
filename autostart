@@ -39,7 +39,7 @@ hc keybind XF86AudioMute spawn amixer -q set Master toggle
 hc keybind XF86Launch1 spawn nemo
 
 # tags
-TAG_NAMES=( 'main' 'work' 'games' 'mail' 'irc' 'chat' )
+TAG_NAMES=( '1' '2' '3' '4' '5' '6' 'mail' 'irc' 'chat' )
 hc rename default "${TAG_NAMES[0]}" || true
 for i in ${!TAG_NAMES[@]} ; do
     hc add "${TAG_NAMES[$i]}"
@@ -123,8 +123,8 @@ hc rule class~'(Bpython2?(-gtk)?)' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
-hc rule class=Firefox tag=main
-hc rule class=Steam tag=games
+hc rule class=Firefox tag=1
+hc rule class=Steam tag=3
 hc rule class=Hexchat tag=irc
 hc rule class=Thunderbird tag=mail
 hc load chat '(split horizontal:0.150000:0
