@@ -37,6 +37,6 @@ ${template9 0} ${template9 1} \
 ${exec amixer get Master | egrep -o '[0-9]+%' | head -n 1}\
 ${else}${ibm_volume}${endif} \
 # Weather!
-${exec cat /tmp/weather} | \
+${exec cat /var/tmp/weather} | \
 # Date and time
 ${time %a %Y-%m-%d} ${time %R}\
