@@ -157,5 +157,6 @@ pgrep xscreensaver || xscreensaver -nosplash &
 pgrep dropbox || dropboxd || dropbox start &
 pgrep nm-applet || nm-applet &
 pgrep redshift || redshift &
+pgrep dunst || dunst &
 # Fix for Java AWT applets on non-reparenting WMs.
 hc setenv _JAVA_AWT_WM_NONREPARENTING 1
