@@ -31,7 +31,7 @@ hc keybind $Mod-F3 spawn lilyterm
 hc keybind $Mod-F4 spawn xkill
 hc keybind $Mod-F5 spawn lilyterm -s -e bpython
 hc keybind XF86ScreenSaver spawn xscreensaver-command -lock
-hc keybind XF86Display spawn arandr
+hc keybind XF86Display spawn ~/bin/rescreen
 hc keybind XF86MonBrightnessDown spawn xbacklight -dec 5
 hc keybind XF86MonBrightnessUp spawn xbacklight -inc 5
 hc keybind XF86AudioRaiseVolume spawn amixer -q set Master 5%+ unmute
