@@ -132,7 +132,7 @@ hc rule class=Hexchat tag=irc
 hc rule class=Thunderbird tag=mail
 hc load chat '(split horizontal:0.150000:0
     (clients grid:0)
-    (split horizontal:0.250000:0 (clients vertical:0) (clients grid:0)))'
+    (split horizontal:0.250000:0 (clients vertical:0) (clients vertical:0)))'
 hc rule class=Pidgin tag=chat index=10
 hc rule class~'(Gpodder|Audacious)' tag=chat index=11
 
