@@ -9,7 +9,7 @@ function hc() {
 hc emit_hook reload
 
 #xsetroot -solid '#5A8E3A'
-fbsetbg -a -r ~/documents/Dropbox/Pictures/walls
+fbsetbg -a -r ~/documents/Dropbox/Pictures/walls/SFW
 
 # remove all existing keybindings
 hc keyunbind --all
@@ -24,6 +24,7 @@ hc keybind $Mod-Shift-c close
 hc keybind $Mod-Control-Shift-i spawn xcalib -invert -alter
 
 # run lots of things
+hc keybind $Mod-Shift-b spawn fbsetbg -a -r ~/documents/Dropbox/Pictures/walls/SFW
 hc keybind $Mod-F2 spawn ~/bin/dmf
 hc keybind $Mod-Shift-F2 spawn dmenu_run
 hc keybind $Mod-F3 spawn lilyterm
